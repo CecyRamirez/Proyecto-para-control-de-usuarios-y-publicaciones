@@ -170,11 +170,12 @@ class Usuarios{
         nuevo.id= '';
         nuevo.id=ult;
         this.datos.push(nuevo);
+        console.log(nuevo);
     }
     buscarUser(username){
-        for(i=0; i<this.datos.length;i++){
+        for( let i=0; i<this.datos.length;i++){
             if(this.datos[i].username== username){
-                //console.log(this.datos[i]);
+                console.log(this.datos[i]);
                 return this.datos[i];
             }
         }
@@ -188,5 +189,34 @@ class Usuarios{
     }
     
 }
+
+// let usuarios= new Usuarios;
+
+// usuarios.agregar({
+// "name": "Leanne",
+// "username": "Br",
+// "email": "Sinre@april.biz",
+// "address": {
+//     "street": "Kas Light",
+//     "suite": "Apt. 556",
+//     "city": "Gwenborough",
+//     "zipcode": "92998-3874",
+//     "geo": {
+//         "lat": "-37.3159",
+//         "lng": "81.1496"
+//     }
+// },
+// "phone": "1-770-736-8031 x56442",
+// "website": "hildegard.org",
+// "company": {
+//     "name": "Romaguera-Crona",
+//     "catchPhrase": "Multi-layered client-server neural-net",
+//     "bs": "harness real-time e-markets"
+// }
+// });
+
+// console.log(usuarios.listar());
+// console.log(usuarios.buscarUser("Br"));
+
 
 

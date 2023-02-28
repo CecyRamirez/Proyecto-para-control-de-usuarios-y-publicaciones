@@ -5,13 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="usuarios.js"></script>
+    <script src="posts.js"></script>
+    <script src="funcionalidad.js"></script>
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
     <h1>Header</h1>
     <div id="menu">
         <button id="agregarUser"> Agregar Usuario</button>
-        <button id="agregarPost"> Agregar Post</button>
         <button id="buscarUser"> Buscar Usuario</button>
         <button id="buscarPostsUser"> Buscar Posts por Usuario</button>
         <button id="buscarPostsId"> Buscar Posts por Id</button>
@@ -20,15 +22,17 @@
     </div>
 
     <section id="mostrarUser">Mostrar Usuario</section>
+
     <section id="mostrarPost">Listar posts</section>
+
 <br>
 
-    <section id="agregarUserSect">
-        <h2>Usuario</h2>
-        <form action="agregarUsuario">
-            <label for="name">Nombre: </label>
+    <section id="agregarUserSect" class="ocultar" >
+        <h2>Agregar Usuario</h2>
+        <form>
+            <label for="name">name: </label>
             <input type="text" id="name">
-            <label for="username">Nombre de Usuario: </label>
+            <label for="username">name de Usuario: </label>
             <input type="text" id="username">
             <label for="email">Email: </label>
             <input type="email" id="email">
@@ -37,18 +41,58 @@
             <label for="age">Edad: </label>
             <input type="number" id="age">   
         </form>
+        <button id="btnAgregarUser">Agregar Registro</button>
     </section>
 
-    <section id="agregarPostSect">
-        <h2>Post</h2>
-        <form action="">
-            <label for="userId">ID de Usuario: </label>
-            <input type="number" id="userId">
-            <label for="title">Titulo: </label>
-            <input type="text" id="title">
-            <label for="body">Texto: </label>
-            <input type="text" id="body">
+
+    <section id="mostrarUserSect" class="ocultar">
+        <input type="text"id="buscarUsername" placeholder="Usuario a buscar">
+        <button id="btnBuscarUser">Buscar Registro</button>
+        <h2>Usuario</h2>
+        <form action="mostrarUsuario">
+            <label for="name">name: </label>
+            <input readonly type="text" id="r-name">
+            <label for="username">name de Usuario: </label>
+            <input readonly type="text" id="r-username">
+            <label for="email">Email: </label>
+            <input readonly type="email" id="r-email">
+            <label for="website">Sitio Web:</label>
+            <input readonly type="url" id="r-website">        
+            <label for="age">Edad: </label>
+            <input readonly type="number" id="r-age">   
         </form>
     </section>
+
+
+    <script>
+
+    const usuarios = new Usuarios();
+        document.getElementById("agregarUser").addEventListener("click",()=>{
+            document.getElementById("agregarUserSect").classList.remove("ocultar");
+            document.getElementById("mostrarUserSect").classList.add("ocultar");
+        })
+
+        document.getElementById("buscarUser").addEventListener("click",()=>{
+            document.getElementById("agregarUserSect").classList.add("ocultar");
+            document.getElementById("mostrarUserSect").classList.remove("ocultar");
+        })
+
+        document.getElementById("btnAgregarUser").addEventListener("click",()=>{
+            console.log("sirve")
+            let age= parseInt(document.getElementById("age").value);
+            let name= document.getElementById("name").value;
+            let username= document.getElementById("username").value;
+            let email= document.getElementById("email").value;
+            let website= document.getElementById("website").value;
+            let id="";
+            usuarios.agregar({"id":" ", "name": name, "username":  username  , "email":  email ,"website": website ,"age":age});
+        })
+        document.getElementById("btnBuscarUser").addEventListener("click",()=>{
+            console.log("sirve buscar")
+            let username= document.getElementById("buscarUsername").value;
+            usuarios.buscarUser(username);
+        })
+
+    </script>
 </body>
 </html>

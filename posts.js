@@ -1,4 +1,4 @@
-class PostEst{
+class Post{
     constructor(){
         this.datos=[
             {
@@ -381,7 +381,7 @@ class PostEst{
     }
     buscar(userId){
         let aux=" ";
-        for(i=0; i<this.datos.length;i++){
+        for(let i=0; i<this.datos.length;i++){
             if(this.datos[i].userId== userId){
                 aux+=this.datos[i];
             }
@@ -389,7 +389,7 @@ class PostEst{
         return aux;
     }
     buscarPost(id){
-        for(i=0; i<this.datos.length;i++){
+        for(let i=0; i<this.datos.length;i++){
             if(this.datos[i].id== id){
                 //console.log(this.datos[i]);
                 return this.datos[i];
@@ -397,3 +397,8 @@ class PostEst{
         }
     }
 }
+
+let post= new Post;
+
+console.log(post.buscar(7));
+console.log(post.buscarPost(62));
