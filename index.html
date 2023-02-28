@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="usuarios.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Header</h1>
+    <div id="menu">
+        <button id="agregarUser"> Agregar Usuario</button>
+        <button id="agregarPost"> Agregar Post</button>
+        <button id="buscarUser"> Buscar Usuario</button>
+        <button id="buscarPostsUser"> Buscar Posts por Usuario</button>
+        <button id="buscarPostsId"> Buscar Posts por Id</button>
+        <button id="listarUsers">Listar usuarios</button>
+
+    </div>
+
+    <section id="mostrarUser">Mostrar Usuario</section>
+    <section id="mostrarPost">Listar posts</section>
+<br>
+
+    <section id="agregarUserSect">
+        <h2>Usuario</h2>
+        <form action="agregarUsuario">
+            <label for="name">Nombre: </label>
+            <input type="text" id="name">
+            <label for="username">Nombre de Usuario: </label>
+            <input type="text" id="username">
+            <label for="email">Email: </label>
+            <input type="email" id="email">
+            <label for="website">Sitio Web:</label>
+            <input type="url" id="website">        
+            <label for="age">Edad: </label>
+            <input type="number" id="age">   
+        </form>
+    </section>
+
+    <section id="agregarPostSect">
+        <h2>Post</h2>
+        <form action="">
+            <label for="userId">ID de Usuario: </label>
+            <input type="number" id="userId">
+            <label for="title">Titulo: </label>
+            <input type="text" id="title">
+            <label for="body">Texto: </label>
+            <input type="text" id="body">
+        </form>
+    </section>
+</body>
+</html>
