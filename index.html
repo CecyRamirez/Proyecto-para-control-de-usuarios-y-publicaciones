@@ -17,12 +17,10 @@
         <button id="agregarUser"> Agregar Usuario</button>
         <button id="buscarUser"> Buscar Usuario</button>
         <button id="buscarPostsUser"> Buscar Posts por Usuario</button>
-        <button id="buscarPostsId"> Buscar Posts por Id</button>
+        <button id="buscarPostsId"> Buscar Post por Id</button>
         <button id="listarUsers">Listar usuarios</button>
-
     </div>
 <br>
-
     <section id="agregarUserSect" class="ocultar" >
         <h2>Agregar Usuario</h2>
         <form>
@@ -39,7 +37,6 @@
         </form>
         <button id="btnAgregarUser">Agregar Registro</button>
     </section>
-
 
     <section id="mostrarUserSect" class="ocultar">
         <input type="text"id="buscarUsername" placeholder="Usuario a buscar">
@@ -62,7 +59,7 @@
     <section id="buscarPostsUserSect" class="ocultar">
         <select id="sUsuarios" onchange="ShowSelected()">
             <option value="0">Usuarios-----</option>
-        </select>
+        </select> <br>
         <table class="table" id="postsUser">
             <thead class="thead-dark">
               <tr>
@@ -93,14 +90,33 @@
           </table>
     </section>
     
+    <section id="buscarPostsIdSect" class="ocultar">
+        <input type="text"id="idBuscar" placeholder="Id post">
+        <button id="btnBuscarPost">Buscar Publicacion</button>
+        <table class="table" id="postId">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#Id</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Texto</th>
+              </tr>
+            </thead>
+            <tbody id="tblId">
+            </tbody>
+          </table>
+    </section>
+
+
+
     <script>
-    
+    const posts= new Post();
     const usuarios = new Usuarios();
         document.getElementById("agregarUser").addEventListener("click",()=>{
             document.getElementById("agregarUserSect").classList.remove("ocultar");
             document.getElementById("mostrarUserSect").classList.add("ocultar");
             document.getElementById("buscarPostsUserSect").classList.add("ocultar");
             document.getElementById("listarUsersSect").classList.add("ocultar");
+            document.getElementById("buscarPostsIdSect").classList.add("ocultar");
         })
 
         document.getElementById("buscarUser").addEventListener("click",()=>{
@@ -108,6 +124,7 @@
             document.getElementById("mostrarUserSect").classList.remove("ocultar");
             document.getElementById("buscarPostsUserSect").classList.add("ocultar");
             document.getElementById("listarUsersSect").classList.add("ocultar");
+            document.getElementById("buscarPostsIdSect").classList.add("ocultar");
         })
 
         document.getElementById("btnAgregarUser").addEventListener("click",()=>{
@@ -139,6 +156,7 @@
             document.getElementById("agregarUserSect").classList.add("ocultar");
             document.getElementById("mostrarUserSect").classList.add("ocultar");
             document.getElementById("listarUsersSect").classList.add("ocultar");
+            document.getElementById("buscarPostsIdSect").classList.add("ocultar");
 
             //cargar Select
             let users = usuarios.listar();
@@ -167,12 +185,30 @@
             document.getElementById("buscarPostsUserSect").classList.add("ocultar");
             document.getElementById("agregarUserSect").classList.add("ocultar");
             document.getElementById("mostrarUserSect").classList.add("ocultar");
+            document.getElementById("buscarPostsIdSect").classList.add("ocultar");
 
             let users = usuarios.listar();
+            document.getElementById("tblB").innerHTML= "";
             users.forEach(element => {
                 document.getElementById("tblB").innerHTML+= "<tr><th scope='row'>"+ element.id +"</th><td>"+ element.name + "</td><td>" + element.username + "</td><td>"+ element.email + "</td><td>" + element.website + "</td><td>"+ element.age + "</td></tr>"
             });
         })
-    </script>
+        //POST POR ID
+        document.getElementById("buscarPostsId").addEventListener("click",()=>{
+            document.getElementById("buscarPostsIdSect").classList.remove("ocultar");
+            document.getElementById("listarUsersSect").classList.add("ocultar");
+            document.getElementById("buscarPostsUserSect").classList.add("ocultar");
+            document.getElementById("agregarUserSect").classList.add("ocultar");
+            document.getElementById("mostrarUserSect").classList.add("ocultar");
+            
+        })
+        document.getElementById("btnBuscarPost").addEventListener("click",()=>{
+            let id= document.getElementById("idBuscar").value;
+            let publi= posts.buscarPost(id);
+            document.getElementById("tblId").innerHTML= "";
+                document.getElementById("tblId").innerHTML+= "<tr><th scope='row'>"+ publi.id +"</th><td>"+ publi.title + "</td><td>" + publi.body + "</td></tr>"
+        })
+
+        </script>
 </body>
 </html>
