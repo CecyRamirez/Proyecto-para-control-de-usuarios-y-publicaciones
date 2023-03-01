@@ -14,11 +14,11 @@
 <body>
     <h1>Proyecto para control de usuarios y publicaciones</h1>
     <div id="menu">
-        <button id="agregarUser"> Agregar Usuario</button>
-        <button id="buscarUser"> Buscar Usuario</button>
-        <button id="buscarPostsUser"> Buscar Posts por Usuario</button>
-        <button id="buscarPostsId"> Buscar Post por Id</button>
-        <button id="listarUsers">Listar usuarios</button>
+        <button class="btnMenu" id="agregarUser"> Agregar Usuario</button>
+        <button class="btnMenu" id="buscarUser"> Buscar Usuario</button>
+        <button class="btnMenu"id="buscarPostsUser"> Buscar Posts por Usuario</button>
+        <button class="btnMenu" id="buscarPostsId"> Buscar Post por Id</button>
+        <button class="btnMenu" id="listarUsers">Listar usuarios</button>
     </div>
 <br>
     <section id="agregarUserSect" class="ocultar" >
@@ -91,7 +91,7 @@
     </section>
     
     <section id="buscarPostsIdSect" class="ocultar">
-        <input type="text"id="idBuscar" placeholder="Id post">
+        <input type="number" id="idBuscar" placeholder="Id post">
         <button id="btnBuscarPost">Buscar Publicacion</button>
         <table class="table" id="postId">
             <thead class="thead-dark">
