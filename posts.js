@@ -380,10 +380,11 @@ class Post{
         this.datos.push(post);
     }
     buscar(userId){
-        let aux=" ";
+        let aux=[];
         for(let i=0; i<this.datos.length;i++){
             if(this.datos[i].userId== userId){
-                aux+=this.datos[i];
+                aux.push(this.datos[i]);
+                console.log("ahi va")
             }
         }
         return aux;
@@ -400,5 +401,5 @@ class Post{
 
 let post= new Post;
 
-console.log(post.buscar(7));
-console.log(post.buscarPost(62));
+// console.log(post.buscar(7));
+// console.log(post.buscarPost(62).title);

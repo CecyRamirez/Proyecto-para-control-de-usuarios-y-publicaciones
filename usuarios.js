@@ -181,42 +181,7 @@ class Usuarios{
         }
     }
     listar(){
-        let aux="";
-        for (let i=0;i< this.datos.length; i++){
-            aux+= this.datos[i];
-        }
-        return aux;
+        return this.datos;
     }
     
 }
-
-// let usuarios= new Usuarios;
-
-// usuarios.agregar({
-// "name": "Leanne",
-// "username": "Br",
-// "email": "Sinre@april.biz",
-// "address": {
-//     "street": "Kas Light",
-//     "suite": "Apt. 556",
-//     "city": "Gwenborough",
-//     "zipcode": "92998-3874",
-//     "geo": {
-//         "lat": "-37.3159",
-//         "lng": "81.1496"
-//     }
-// },
-// "phone": "1-770-736-8031 x56442",
-// "website": "hildegard.org",
-// "company": {
-//     "name": "Romaguera-Crona",
-//     "catchPhrase": "Multi-layered client-server neural-net",
-//     "bs": "harness real-time e-markets"
-// }
-// });
-
-// console.log(usuarios.listar());
-// console.log(usuarios.buscarUser("Br"));
-
-
-

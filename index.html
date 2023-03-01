@@ -7,11 +7,12 @@
     <script src="usuarios.js"></script>
     <script src="posts.js"></script>
     <script src="funcionalidad.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
-    <h1>Header</h1>
+    <h1>Proyecto para control de usuarios y publicaciones</h1>
     <div id="menu">
         <button id="agregarUser"> Agregar Usuario</button>
         <button id="buscarUser"> Buscar Usuario</button>
@@ -20,26 +21,21 @@
         <button id="listarUsers">Listar usuarios</button>
 
     </div>
-
-    <section id="mostrarUser">Mostrar Usuario</section>
-
-    <section id="mostrarPost">Listar posts</section>
-
 <br>
 
     <section id="agregarUserSect" class="ocultar" >
         <h2>Agregar Usuario</h2>
         <form>
-            <label for="name">name: </label>
-            <input type="text" id="name">
-            <label for="username">name de Usuario: </label>
-            <input type="text" id="username">
+            <label for="name">Nombre: </label>
+            <input type="text" id="name"> <br>
+            <label for="username">Nombre de Usuario: </label>
+            <input type="text" id="username"> <br>
             <label for="email">Email: </label>
-            <input type="email" id="email">
+            <input type="email" id="email"><br>
             <label for="website">Sitio Web:</label>
-            <input type="url" id="website">        
+            <input type="url" id="website"><br>      
             <label for="age">Edad: </label>
-            <input type="number" id="age">   
+            <input type="number" id="age"> <br>
         </form>
         <button id="btnAgregarUser">Agregar Registro</button>
     </section>
@@ -50,31 +46,68 @@
         <button id="btnBuscarUser">Buscar Registro</button>
         <h2>Usuario</h2>
         <form action="mostrarUsuario">
-            <label for="name">name: </label>
-            <input readonly type="text" id="r-name">
-            <label for="username">name de Usuario: </label>
-            <input readonly type="text" id="r-username">
+            <label for="name">Nombre: </label>
+            <input readonly type="text" id="r-name"> <br>
+            <label for="username">Nombre de Usuario: </label>
+            <input readonly type="text" id="r-username"> <br>
             <label for="email">Email: </label>
-            <input readonly type="email" id="r-email">
+            <input readonly type="email" id="r-email"> <br>
             <label for="website">Sitio Web:</label>
-            <input readonly type="url" id="r-website">        
+            <input readonly type="url" id="r-website">   <br>     
             <label for="age">Edad: </label>
             <input readonly type="number" id="r-age">   
         </form>
     </section>
 
-
+    <section id="buscarPostsUserSect" class="ocultar">
+        <select id="sUsuarios" onchange="ShowSelected()">
+            <option value="0">Usuarios-----</option>
+        </select>
+        <table class="table" id="postsUser">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#Id</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Texto</th>
+              </tr>
+            </thead>
+            <tbody id="tabB">
+            </tbody>
+          </table>
+    </section>
+    
+    <section id="listarUsersSect" class="ocultar">
+        <table class="table" id="tblUser">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Nombre de usuario</th>
+                <th scope="col">Email</th>
+                <th scope="col">Website</th>
+                <th scope="col">Edad</th>
+              </tr>
+            </thead>
+            <tbody id="tblB">
+            </tbody>
+          </table>
+    </section>
+    
     <script>
-
+    
     const usuarios = new Usuarios();
         document.getElementById("agregarUser").addEventListener("click",()=>{
             document.getElementById("agregarUserSect").classList.remove("ocultar");
             document.getElementById("mostrarUserSect").classList.add("ocultar");
+            document.getElementById("buscarPostsUserSect").classList.add("ocultar");
+            document.getElementById("listarUsersSect").classList.add("ocultar");
         })
 
         document.getElementById("buscarUser").addEventListener("click",()=>{
             document.getElementById("agregarUserSect").classList.add("ocultar");
             document.getElementById("mostrarUserSect").classList.remove("ocultar");
+            document.getElementById("buscarPostsUserSect").classList.add("ocultar");
+            document.getElementById("listarUsersSect").classList.add("ocultar");
         })
 
         document.getElementById("btnAgregarUser").addEventListener("click",()=>{
@@ -87,12 +120,59 @@
             let id="";
             usuarios.agregar({"id":" ", "name": name, "username":  username  , "email":  email ,"website": website ,"age":age});
         })
+
         document.getElementById("btnBuscarUser").addEventListener("click",()=>{
             console.log("sirve buscar")
-            let username= document.getElementById("buscarUsername").value;
-            usuarios.buscarUser(username);
+            let bUsername= document.getElementById("buscarUsername").value;
+            //cargar datos en form
+            document.getElementById("r-age").value= usuarios.buscarUser(bUsername).age;
+            document.getElementById("r-name").value=usuarios.buscarUser(bUsername).name;
+            document.getElementById("r-username").value=usuarios.buscarUser(bUsername).username;
+            document.getElementById("r-email").value=usuarios.buscarUser(bUsername).email;
+            document.getElementById("r-website").value=usuarios.buscarUser(bUsername).website;
         })
 
+
+        document.getElementById("buscarPostsUser").addEventListener("click",()=>{
+            //Ocultar secciones
+            document.getElementById("buscarPostsUserSect").classList.remove("ocultar");
+            document.getElementById("agregarUserSect").classList.add("ocultar");
+            document.getElementById("mostrarUserSect").classList.add("ocultar");
+            document.getElementById("listarUsersSect").classList.add("ocultar");
+
+            //cargar Select
+            let users = usuarios.listar();
+            users.forEach(element => {
+                document.getElementById("sUsuarios").innerHTML+="<option value='"+ element.id + "'>" + element.username + "</option>"
+            });
+        })
+
+        //CARGAR PUBLICACIONES POR USUARIO
+        function ShowSelected(){
+        const posts= new Post();
+        /* Para obtener el valor */
+        let usuario = document.getElementById("sUsuarios").value;
+        console.log(usuario);
+            let publi= posts.buscar(usuario);
+        console.log("array"+ publi)
+        document.getElementById("tabB").innerHTML= "";
+            publi.forEach(element => {
+                document.getElementById("tabB").innerHTML+= "<tr><th scope='row'>"+ element.id +"</th><td>"+ element.title + "</td><td>" + element.body + "</td></tr>"
+            });
+        }
+
+        //LISTAR USUARIOS
+        document.getElementById("listarUsers").addEventListener("click",()=>{
+            document.getElementById("listarUsersSect").classList.remove("ocultar");
+            document.getElementById("buscarPostsUserSect").classList.add("ocultar");
+            document.getElementById("agregarUserSect").classList.add("ocultar");
+            document.getElementById("mostrarUserSect").classList.add("ocultar");
+
+            let users = usuarios.listar();
+            users.forEach(element => {
+                document.getElementById("tblB").innerHTML+= "<tr><th scope='row'>"+ element.id +"</th><td>"+ element.name + "</td><td>" + element.username + "</td><td>"+ element.email + "</td><td>" + element.website + "</td><td>"+ element.age + "</td></tr>"
+            });
+        })
     </script>
 </body>
 </html>
